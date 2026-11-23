@@ -1,0 +1,51 @@
+name: CurseForge
+
+# Publishes the jar of an existing GitHub Release to CurseForge, with the notes of the release. Use it for a release
+# that the workflow Release did not send to CurseForge: "Run workflow" with the version, for example 0.43.1.
+# The workflow Release sends the new releases (job CurseForge). The secret CURSEFORGE_TOKEN is an API token of
+# CurseForge.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: The version of the GitHub Release, with no "v" (for example 0.43.1)
+        required: true
+        type: string
+      type:
+        description: The release type on CurseForge
+        type: choice
+        options: [release, beta, alpha]
+        default: release
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish to CurseForge
+    if: github.repository_owner == 'Nicolas-s-minecraft-mods'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Download the jar and the notes of the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          mkdir -p build/libs
+          gh release download "v${VERSION}" --repo "$GITHUB_REPOSITORY" --pattern "runehold-${VERSION}.jar" \
+            --dir build/libs
+          gh release view "v${VERSION}" --repo "$GITHUB_REPOSITORY" --json body --jq .body > build/release-notes.md
+
+      - name: Publish to CurseForge
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          VERSION: ${{ inputs.version }}
+          TYPE: ${{ inputs.type }}
+        run: python3 scripts/curseforge.py publish --version "$VERSION" --notes build/release-notes.md --type "$TYPE"
