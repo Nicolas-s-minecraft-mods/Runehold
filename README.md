@@ -12,7 +12,17 @@ NeoForge mod: balance of the enchantments, with an anvil that has no level cap.
 
 ## State
 
-The mod is in development. It loads in the game, but it has no function yet. The planned functions are in [docs/design.md](docs/design.md).
+The anvil has no level cap and no "Too Expensive!" limit:
+
+- 2 books of the maximum level give a book of the next level. Each level costs double the level before it.
+- A repair has no penalty for the work before it. A repair of the same item always has the same cost.
+- The client shows the cost of the anvil and the levels above X as numbers, for example "Efficiency 20".
+
+The mod needs no other mod. The rules and the configuration are in [docs/design.md](docs/design.md).
+
+## Worlds of Folkhold Balance
+
+A world of Folkhold Balance can use Runehold for the anvil rules. The world loses nothing. The config file has a new name (`runehold-server.toml`). To keep changed values, copy the section `[anvil]` to the new file. The steps are in [docs/design.md](docs/design.md#worlds-of-folkhold-balance).
 
 ## Contribute
 

@@ -14,6 +14,10 @@ logoBlur = false
 # The mod list shows the translated description (key: fml.menu.mods.info.description.<mod_id>) when it exists.
 description = '''${mod_description}'''
 
+# The anvil shows high levels and has no "Too Expensive!" limit.
+[[mixins]]
+config = "runehold.mixins.json"
+
 [[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "required"
