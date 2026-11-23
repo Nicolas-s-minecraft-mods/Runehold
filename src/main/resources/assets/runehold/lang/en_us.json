@@ -1,0 +1,17 @@
+{
+  "runehold.name": "Runehold",
+  "fml.menu.mods.info.description.runehold": "Balance of the enchantments, with an anvil that has no level cap.",
+  "runehold.configuration.title": "Runehold configuration",
+  "runehold.configuration.anvil": "Anvil",
+  "runehold.configuration.anvilEnabled": "Use the anvil rules",
+  "runehold.configuration.mergeRule": "Merge rule of the levels",
+  "runehold.configuration.enchantCostFactor": "Enchantment cost factor",
+  "runehold.configuration.operationCost": "Cost of an operation",
+  "runehold.configuration.weights": "Weights of the enchantments",
+  "runehold.configuration.repairEnchantFactor": "Repair factor of the enchantments",
+  "runehold.configuration.repairBaseCost": "Base cost of a repair by material",
+  "runehold.configuration.repairDefaultBaseCost": "Default base cost of a repair",
+  "runehold.configuration.priorWorkPenalty": "Prior work penalty",
+  "runehold.configuration.levelCaps": "Level caps",
+  "runehold.configuration.absoluteMaxLevel": "Absolute maximum level"
+}

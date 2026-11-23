@@ -1,0 +1,33 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/Nicolas-s-minecraft-mods/Runehold/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+displayURL = "https://github.com/Nicolas-s-minecraft-mods/Runehold"
+logoFile = "runehold_logo.png"
+logoBlur = false
+# The mod list shows the translated description (key: fml.menu.mods.info.description.<mod_id>) when it exists.
+description = '''${mod_description}'''
+
+# The anvil shows high levels and has no "Too Expensive!" limit.
+[[mixins]]
+config = "runehold.mixins.json"
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neo_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"

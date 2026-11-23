@@ -1,0 +1,17 @@
+{
+  "runehold.name": "Runehold",
+  "fml.menu.mods.info.description.runehold": "Équilibrage des enchantements, avec une enclume sans limite de niveau.",
+  "runehold.configuration.title": "Configuration de Runehold",
+  "runehold.configuration.anvil": "Enclume",
+  "runehold.configuration.anvilEnabled": "Utiliser les règles de l'enclume",
+  "runehold.configuration.mergeRule": "Règle de fusion des niveaux",
+  "runehold.configuration.enchantCostFactor": "Facteur du coût d'enchantement",
+  "runehold.configuration.operationCost": "Coût d'une opération",
+  "runehold.configuration.weights": "Poids des enchantements",
+  "runehold.configuration.repairEnchantFactor": "Facteur de réparation des enchantements",
+  "runehold.configuration.repairBaseCost": "Coût de base d'une réparation par matériau",
+  "runehold.configuration.repairDefaultBaseCost": "Coût de base par défaut d'une réparation",
+  "runehold.configuration.priorWorkPenalty": "Pénalité de travail antérieur",
+  "runehold.configuration.levelCaps": "Plafonds de niveau",
+  "runehold.configuration.absoluteMaxLevel": "Niveau maximal absolu"
+}
