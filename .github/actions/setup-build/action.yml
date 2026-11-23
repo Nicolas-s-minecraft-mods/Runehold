@@ -1,5 +1,7 @@
 name: Set up the build
-description: Installs JDK 21 and Gradle. Run it after the checkout.
+description: >-
+  Installs JDK 21 and Gradle. Restores the cache of the Gradle downloads, and gives more tries to a failed download.
+  Run it after the checkout.
 
 runs:
   using: composite
@@ -10,5 +12,23 @@ runs:
         distribution: temurin
         java-version: '21'
 
+    # The cache contains the Gradle User Home caches: the dependencies, the Gradle distribution and the NeoForge
+    # artifacts (neoformruntime). The jobs on develop and on main write the cache. The pull requests read the cache of
+    # develop and do not write it.
     - name: Set up Gradle
       uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+      with:
+        cache-read-only: ${{ github.ref != 'refs/heads/develop' && github.ref != 'refs/heads/main' }}
+
+    # A Maven server can send HTTP 429 (Too Many Requests). Gradle tries a failed download again (also for HTTP 429),
+    # and doubles the wait after each try. These internal properties of Gradle set 6 tries and a first wait of
+    # 5 seconds: the waits are 5, 10, 20, 40 and 80 seconds.
+    - name: Set the tries of a failed download
+      shell: bash
+      run: |
+        home="${GRADLE_USER_HOME:-$HOME/.gradle}"
+        mkdir -p "$home"
+        {
+          echo 'systemProp.org.gradle.internal.repository.max.tentatives=6'
+          echo 'systemProp.org.gradle.internal.repository.initial.backoff=5000'
+        } >> "$home/gradle.properties"
