@@ -112,6 +112,21 @@ neoForge {
     }
 }
 
+// The GameTests set the server options in memory. A reload of an options file sets the values of the file again, at a
+// random time. Thus the GameTest server does not watch the options files.
+def gameTestFmlConfig = file('run-gametest/config/fml.toml')
+tasks.named('runGameTestServer') {
+    doFirst {
+        gameTestFmlConfig.parentFile.mkdirs()
+        if (gameTestFmlConfig.exists()) {
+            gameTestFmlConfig.text = gameTestFmlConfig.text
+                    .replace('disableConfigWatcher = false', 'disableConfigWatcher = true')
+        } else {
+            gameTestFmlConfig.text = 'disableConfigWatcher = true\n'
+        }
+    }
+}
+
 // Expands the properties in src/main/templates (for example META-INF/neoforge.mods.toml).
 def generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
     def replaceProperties = [

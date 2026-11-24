@@ -28,6 +28,7 @@
 - `./gradlew build`: compiles, checks the format (Spotless) and the translations, runs Error Prone and the unit tests (JUnit).
 - `./gradlew spotlessApply`: fixes the format of the files.
 - `./gradlew runGameTestServer`: runs the in-game tests (GameTest) in a new world, then stops.
+- The GameTest server does not watch the options files (`disableConfigWatcher` in `run-gametest/config/fml.toml`). A GameTest sets an option in memory, and a reload of the file cannot change this value.
 - `./gradlew runClient` and `./gradlew runServer`: a client and a dedicated server with the mod.
 - The pure logic (level costs, book levels) has JUnit tests. The behavior in the game has GameTests.
 
